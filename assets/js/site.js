@@ -1,8 +1,3 @@
-/* ============================================================
-   李羊 LEEYANG — 共用互動（純原生 JavaScript，無任何函式庫）
-   導覽列捲動效果、手機選單開關、捲動淡入、數字動畫
-   （Bootstrap 僅保留 CSS，JS 不再依賴）
-   ============================================================ */
 (function () {
   'use strict';
 
@@ -13,7 +8,6 @@
 
   ready(function () {
 
-    // 1) 導覽列捲動時加底線
     var nav = document.querySelector('.lx-nav');
     function onScroll() {
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 10);
@@ -21,7 +15,6 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // 2) 手機選單開關（原生，取代 Bootstrap collapse）
     var toggler = document.querySelector('.navbar-toggler');
     var navItems = document.getElementById('navItems');
     function setMenu(open) {
@@ -43,7 +36,7 @@
       });
     }
 
-    // 3) 捲動淡入
+    window.__lxReveal = true;
     var reveals = document.querySelectorAll('.lx-reveal');
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
@@ -56,7 +49,6 @@
       reveals.forEach(function (el) { el.classList.add('in'); });
     }
 
-    // 4) 數字累計動畫
     function countUp(el) {
       var to = parseInt(el.getAttribute('data-to'), 10) || 0;
       var suffix = el.getAttribute('data-suffix') || '';
